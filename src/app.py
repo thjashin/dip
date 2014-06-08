@@ -1,7 +1,15 @@
-from flask import Flask, request, Response
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# @file: app.py
+
 import base64
 from cStringIO import StringIO
 import os
+
+from flask import Flask, request, Response
+
+from main import main_proc
 
 app = Flask(__name__)
 
@@ -14,7 +22,7 @@ def main_func(run_id, query, image):
         image: file-like object, contain a jpeg image
     you should use query and image to calculate a score
     """
-    return 0.3
+    return main_proc(query, image)
 
 @app.route('/', methods=['POST'])
 def interface():
