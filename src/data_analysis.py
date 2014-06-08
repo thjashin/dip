@@ -12,7 +12,7 @@ def query_existed():
         for line in f:
             arr = line.strip().split('\t')
             query = arr[1].strip()
-            print query
+            print arr
             break
             train_queries.add(query)
 
@@ -21,7 +21,7 @@ def query_existed():
         for line in f:
             arr = line.strip().split('\t')
             query = arr[0].strip()
-            print query
+            print arr
             break
             dev_queries.add(query)
     existed = len(dev_queries.intersection(train_queries))
