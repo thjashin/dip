@@ -59,7 +59,7 @@ def query_search_test():
         for line in f:
             arr = line.strip().split('\t')
             query = arr[0].strip()
-            dev_queries.add(query)
+            dev_queries.append(query)
 
     print 'conduct a search...'
     sys.stdout.flush()
