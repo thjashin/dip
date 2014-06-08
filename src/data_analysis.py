@@ -7,23 +7,28 @@ from __future__ import division
 from config import *
 
 def query_existed():
-    train_queries = []
+    train_queries = set()
     with open(train_click_log, 'r') as f:
         for line in f:
             arr = line.strip().split('\t')
             query = arr[1].strip()
-            train_queries.append(query)
+            print query
+            break
+            train_queries.add(query)
 
-    dev_count = 0
-    existed_count = 0
+    dev_queries = set()
     with open(dev_label, 'r') as f:
         for line in f:
             arr = line.strip().split('\t')
             query = arr[0].strip()
-            dev_count += 1
-            if query in train_queries:
-                existed_count += 1
-    print 'existed ratio:', existed_count/dev_count
+            print query
+            break
+            dev_queries.add(query)
+    existed = len(dev_queries.intersection(train_queries))
+    total = len(dev_queries)
+    print 'existed:', existed
+    print 'dev:', total
+    print 'existed ratio:', existed/total
 
 
 if __name__ == "__main__":
