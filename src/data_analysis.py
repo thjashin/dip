@@ -95,7 +95,7 @@ def get_vocabulary():
         print 'write to query doc file...'
         sys.stdout.flush()
         query_doc_str = ' '.join(train_queries)
-        with open(query_doc, 'r') as f:
+        with open(query_doc, 'w') as f:
             f.write(query_doc_str)
 
     print 'tokenize...'
