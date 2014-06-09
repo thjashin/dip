@@ -100,8 +100,8 @@ def get_vocabulary():
 
     print 'tokenize...'
     sys.stdout.flush()
-    pre_tokens = set([word for sent in sent_tokenize(query_doc) for 
-                      word in word_tokenize(sent)])
+    pre_tokens = set([word for sent in nltk.sent_tokenize(query_doc) for 
+                      word in nltk.word_tokenize(sent)])
     pre_tokens = set(t.lower() for t in pre_tokens if len(t) >= 3)
 
     print 'remove stop word...'
