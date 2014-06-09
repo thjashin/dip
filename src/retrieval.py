@@ -9,7 +9,7 @@ from whoosh.fields import *
 from config import *
 
 def create_index():
-    schema = Schema(img=STORED(stored=True), query_doc=TEXT(stored=True))
+    schema = Schema(img=STORED(), query_doc=TEXT(stored=True))
     ix = create_in(index_dir, schema)
     writer = ix.writer()
 
