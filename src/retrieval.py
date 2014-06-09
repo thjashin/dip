@@ -60,4 +60,5 @@ def test_search():
 
 
 if __name__ == "__main__":
-    create_index()
+    # create_index()
+    test_search()
