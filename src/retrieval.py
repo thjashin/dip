@@ -3,7 +3,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # @file: retrieval.py
 
-from whoosh import create_in
+from whoosh.index import create_in
 from whoosh.fields import *
 
 from config import *
