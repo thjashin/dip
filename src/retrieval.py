@@ -51,7 +51,7 @@ def test_search():
     ix = open_dir(index_dir)
     with ix.searcher() as searcher:
         parser = QueryParser('query_doc', ix.schema)
-        myquery = parser.parse(u'black history')
+        myquery = parser.parse(u'black hitsory')
         results = searcher.search(myquery)
         print len(results)
         for i in results:
@@ -76,5 +76,5 @@ def query_top10_images(query):
 
 if __name__ == "__main__":
     # create_index()
-    # test_search()
-    print query_top10_images('black hitsory')
+    test_search()
+    # print query_top10_images('black history')
