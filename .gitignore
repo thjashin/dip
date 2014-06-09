@@ -4,7 +4,9 @@
 .directory
 *.vpp~*
 *.swp
+*.pyc
 tags
 Thumbs.db
 /dumps/
 /data/
+/lib/
