@@ -64,13 +64,16 @@ def query_top10_images(query):
         return []
 
     ix = open_dir(index_dir)
+    results = None
     with ix.searcher() as searcher:
         parser = QueryParser('query_doc', ix.schema)
         query = parser.parser(query)
         results = searcher.search(query)
 
+    return [i['img'] for i in results]
+
 
 if __name__ == "__main__":
     # create_index()
-    test_search()
-    
+    # test_search()
+    print query_top10_images('black history')
