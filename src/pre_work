@@ -36,6 +36,7 @@ def count():
                 max_len = l
     print max_len
 def make_qitable():
+    print 'make database'
     qit = 'query_image_table.db3'
     con = sqlite3.connect(qit)
     cur = con.cursor()
