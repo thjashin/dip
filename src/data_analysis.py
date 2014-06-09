@@ -7,6 +7,7 @@ from __future__ import division
 import sys
 
 import ngram
+import nltk
 
 from config import *
 
@@ -66,6 +67,16 @@ def query_search_test():
 
     G = ngram.NGram(train_queries)
     print G.NGram.search(dev_queries[0], threshold=0.3)
+
+
+def get_vocabulary():
+    print 'get queries in train set...'
+    sys.stdout.flush()
+
+    train_queries = set()
+    with open(train_click_log, 'r') as f:
+        for line in f:
+
 
 
 if __name__ == "__main__":
