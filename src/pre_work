@@ -47,8 +47,10 @@ def make_qitable():
     with open(train_click_log, 'r') as f:
         for line in f:
             arr = line.strip().split('\t')
-            image = '"' + arr[0].strip() + '"'
-            query = '"' + arr[1].strip() + '"'
+            image = '"%s"' % arr[0].strip()
+            #'"%s, %s"' % (1, 2)
+            #image = '"' + arr[0].strip() + '"'
+            query = '"%s"' % arr[1].strip()
             click = string.atol(arr[2].strip())
             commond = 'INSERT INTO qit(query, image, click) VALUES(' + query + ',' + image + ',' + click + ')'
             cur.execute(command)
