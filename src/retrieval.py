@@ -55,7 +55,7 @@ def test_search():
         results = searcher.search(myquery)
         print len(results)
         for i in results:
-            print i['img']
+            print i
 
 def query_top10_images(query):
     try:
