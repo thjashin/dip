@@ -45,12 +45,13 @@ def make_qitable():
     con.commit()
     fileName = train_click_log
     with open(train_click_log, 'r') as f:
-        arr = line.strip().split('\t')
-        image = '"' + arr[0].strip() + '"'
-        query = '"' + arr[1].strip() + '"'
-        click = string.atol(arr[2].strip())
-        commond = 'INSERT INTO qit(query, image, click) VALUES(' + query + ',' + image + ',' + click + ')'
-        cur.execute(command)
+        for line in f:
+            arr = line.strip().split('\t')
+            image = '"' + arr[0].strip() + '"'
+            query = '"' + arr[1].strip() + '"'
+            click = string.atol(arr[2].strip())
+            commond = 'INSERT INTO qit(query, image, click) VALUES(' + query + ',' + image + ',' + click + ')'
+            cur.execute(command)
     con.commit()
 
 if __name__ == "__main__":
