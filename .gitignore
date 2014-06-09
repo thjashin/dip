@@ -8,6 +8,7 @@
 *.pyc
 tags
 Thumbs.db
+*.db3
 /dumps/
 /data/
 /lib/
