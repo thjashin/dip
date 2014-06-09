@@ -29,7 +29,7 @@ def create_index():
                 sys.stdout.write('\r%d ...' % counter)
                 sys.stdout.flush()
                 if (last_image is not None):
-                    writer.add_document(img=last_image, query_doc=query_doc)
+                    writer.add_document(img=last_image, query_doc=u' '.join(query_doc))
                 last_image = image
                 query_doc = []
             try:
