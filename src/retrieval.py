@@ -70,7 +70,7 @@ def query_top10_images(query):
         results = searcher.search(query)
 
 
-
 if __name__ == "__main__":
     # create_index()
-    # test_search()
+    test_search()
+    
