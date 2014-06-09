@@ -5,8 +5,10 @@
 
 import sys
 
-from whoosh.index import create_in
+from whoosh.index import create_in, open_dir
 from whoosh.fields import *
+from whoosh.query import *
+from whoosh.qparser import QueryParser
 
 from config import *
 
@@ -43,6 +45,18 @@ def create_index():
 
         sys.stdout.write('\rfinished!\n')
         sys.stdout.flush()
+
+
+def test_search():
+    ix = open_dir(index_dir)
+    with ix.searcher() as searcher:
+        parser = QueryParser('query_doc', ix.schema)
+        myquery = parser.parse(u'black history')
+        results = searcher.search(myquery)
+        print len(results)
+        for i in results:
+            print i
+
 
 
 if __name__ == "__main__":
