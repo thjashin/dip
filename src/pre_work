@@ -63,7 +63,7 @@ def test_qitable():
     con = sqlite3.connect(qit)
     cur = con.cursor()
     query = '"black history month"'
-    cmd = 'select * from qit where query=%s', %query
+    cmd = 'select * from qit where query=%s' %query
     cur.execute(cmd)
     print cu.fetchall()
 
