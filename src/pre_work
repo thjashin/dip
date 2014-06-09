@@ -23,17 +23,16 @@ def count():
     dev: 1000
     existed ratio: 0.355
     """
+    max_count = 0;
     fileName = train_click_log
     """fileName = '/home/lql/python/input.txt'"""
     with open(train_click_log, 'r') as f:
         for line in f:
             arr = line.strip().split('\t')
-            image = arr[0].strip()
-            query = arr[1].strip()
             click = string.atol(arr[2].strip())
-            print image
-            print query
-            print click
+            if click > max_count:
+                max_count = click
+    print max_count
 if __name__ == "__main__":
     # query_existed()
     # query_search_test()
