@@ -51,15 +51,7 @@ def make_qitable():
         commond = 'INSERT INTO qit(query, image, click) VALUES(' + query + ',' + image + ',' + click + ')'
         cur.execute(command)
     con.commit()
-    """
-def test_qitable():
-    print 'test qitable'
-    qit = 'query_image_table.db3'
-    con = sqlite3.connect(qit)
-    cur = con.cursor()
-"""
 if __name__ == "__main__":
     # query_existed()
     # query_search_test()
     make_qitable()
-   """ test_qitable()"""
