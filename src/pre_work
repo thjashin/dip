@@ -44,7 +44,7 @@ def make_qitable():
     cur.execute('CREATE TABLE qit(query TEXT, image TEXT, click INTEGER)')
     con.commit()
     fileName = train_click_log
-    with open(train_click_log, 'r') as f:
+    with open(fileName, 'r') as f:
         for line in f:
             arr = line.strip().split('\t')
             image = '"%s"' % arr[0].strip()
@@ -52,8 +52,8 @@ def make_qitable():
             #image = '"' + arr[0].strip() + '"'
             query = '"%s"' % arr[1].strip()
             click = arr[2].strip()
-            commond = 'INSERT INTO qit(query, image, click) VALUES(%s,%s,%s)' %(query,image,click)
-            cur.execute(command)
+            cmd = 'INSERT INTO qit(query, image, click) VALUES(%s,%s,%s)' %(query,image,click)
+            cur.execute(cmd)
     con.commit()
 
 if __name__ == "__main__":
