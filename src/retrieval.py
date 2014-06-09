@@ -67,7 +67,7 @@ def query_top10_images(query):
     results = None
     with ix.searcher() as searcher:
         parser = QueryParser('query_doc', ix.schema)
-        query = parser.parser(query)
+        query = parser.parse(query)
         results = searcher.search(query)
 
     return [i['img'] for i in results]
