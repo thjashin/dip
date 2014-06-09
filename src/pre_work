@@ -57,6 +57,16 @@ def make_qitable():
             cur.execute(cmd)
     con.commit()
 
+def test_qitable():
+    print 'test qitable'
+    qit = '../database/query_image_table.db3'
+    con = sqlite3.connect(qit)
+    cur = con.cursor()
+    query = '"black history month"'
+    cmd = 'select * from qit where query=%s', %query;
+    cur.execute(cmd)
+    print cu.fetchall()
+
 if __name__ == "__main__":
     # query_existed()
     # query_search_test()
