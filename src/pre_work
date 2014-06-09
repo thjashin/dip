@@ -62,7 +62,7 @@ def test_qitable():
     qit = '../database/query_image_table.db3'
     con = sqlite3.connect(qit)
     cur = con.cursor()
-    query = '"black history month"'
+    query = '\"black history month\"'
     cmd = 'select * from qit where query=%s' %query
     cur.execute(cmd)
     con.commit()
