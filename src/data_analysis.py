@@ -84,7 +84,7 @@ def get_vocabulary():
     except Exception:
         print 'query doc not existed...'
         sys.stdout.flush()
-        train_queries = set()
+        train_queries = []
         with open(train_click_log, 'r') as f:
             for line in f:
                 arr = line.strip().split('\t')
