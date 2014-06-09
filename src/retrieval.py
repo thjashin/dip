@@ -64,13 +64,14 @@ def query_top10_images(query):
         return []
 
     ix = open_dir(index_dir)
-    results = None
+    ret = None
     with ix.searcher() as searcher:
         parser = QueryParser('query_doc', ix.schema)
         query = parser.parse(query)
         results = searcher.search(query)
+        ret = [i['img'] for i in results]
 
-    return [i['img'] for i in results]
+    return ret
 
 
 if __name__ == "__main__":
