@@ -100,14 +100,16 @@ def get_vocabulary():
 
     print 'tokenize...'
     sys.stdout.flush()
-    pre_tokens = set([word for sent in nltk.sent_tokenize(query_doc) for 
-                      word in nltk.word_tokenize(sent)])
+    pre_tokens = []
+    sentences = [sent for sent in nltk.sent_tokenize(query_doc)]
+    for sent in sentences:
+        pre_tokens.extend([word for word in nltk.word_tokenize(sent)])
     pre_tokens = set(t.lower() for t in pre_tokens if len(t) >= 3)
 
     print 'remove stop word...'
     sys.stdout.flush()
     stopwords = nltk.corpus.stopwords.words('english')
-    tokens = [t for t in pre_tokens if t not in stopwords]
+    tokens = set(t for t in pre_tokens if t not in stopwords)
 
     print 'remained/before:', len(tokens), '/', len(pre_tokens)
     print 'write to vocabulary file...'
