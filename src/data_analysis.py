@@ -11,6 +11,9 @@ import nltk
 
 from config import *
 
+pjoin = os.path.join
+
+
 def query_existed():
     """
     Results:
@@ -73,12 +76,47 @@ def get_vocabulary():
     print 'get queries in train set...'
     sys.stdout.flush()
 
-    train_queries = set()
-    with open(train_click_log, 'r') as f:
-        for line in f:
+    query_doc_existed = False
+    try:
+        with open(query_doc, 'r') as f:
+            query_doc_str = f.read()
+        query_doc_existed = True
+    except Exception:
+        print 'query doc not existed...'
+        sys.stdout.flush()
+        train_queries = set()
+        with open(train_click_log, 'r') as f:
+            for line in f:
+                arr = line.strip().split('\t')
+                query = arr[1].strip()
+                train_queries.append(query)
 
+    if not query_doc_existed:
+        print 'write to query doc file...'
+        sys.stdout.flush()
+        query_doc_str = ' '.join(train_queries)
+        with open(query_doc, 'r') as f:
+            f.write(query_doc_str)
+
+    print 'tokenize...'
+    sys.stdout.flush()
+    pre_tokens = set([word for sent in sent_tokenize(query_doc) for 
+                      word in word_tokenize(sent)])
+    pre_tokens = set(t.lower() for t in pre_tokens if len(t) >= 3)
+
+    print 'remove stop word...'
+    sys.stdout.flush()
+    stopwords = nltk.corpus.stopwords.words('english')
+    tokens = [t for t in pre_tokens if t not in stopwords]
+
+    print 'remained/before:', len(tokens), '/', len(pre_tokens)
+    print 'write to vocabulary file...'
+    sys.stdout.flush()
+    with open(vocab_file, 'w') as f:
+        f.write('\t'.join(tokens))
 
 
 if __name__ == "__main__":
     # query_existed()
-    query_search_test()
+    # query_search_test()
+    get_vocabulary()
