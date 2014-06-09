@@ -52,7 +52,7 @@ def make_qitable():
             #image = '"' + arr[0].strip() + '"'
             query = '"%s"' % arr[1].strip()
             click = arr[2].strip()
-            commond = 'INSERT INTO qit(query, image, click) VALUES(%s,%s,%s)' (%query,%image,%click)
+            commond = 'INSERT INTO qit(query, image, click) VALUES(%s,%s,%s)' %(query,image,click)
             cur.execute(command)
     con.commit()
 
