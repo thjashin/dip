@@ -77,4 +77,4 @@ def query_top10_images(query):
 if __name__ == "__main__":
     # create_index()
     # test_search()
-    print query_top10_images('black history')
+    print query_top10_images('black hitsory')
