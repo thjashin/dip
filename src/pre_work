@@ -36,12 +36,12 @@ def count():
                 max_len = l
     print max_len
 def make_qitable():
-    print 'make database'
-    qit = 'query_image_table.db3'
+    print 'make qitable'
+    qit = '../database/query_image_table.db3'
     con = sqlite3.connect(qit)
     cur = con.cursor()
     cur.execute('CREATE TABLE qit(query TEXT, image TEXT, click INTEGER)')
-    cur.commit()
+    con.commit()
     fileName = train_click_log
     with open(train_click_log, 'r') as f:
         arr = line.strip().split('\t')
@@ -50,8 +50,16 @@ def make_qitable():
         click = string.atol(arr[2].strip())
         commond = 'INSERT INTO qit(query, image, click) VALUES(' + query + ',' + image + ',' + click + ')'
         cur.execute(command)
-    cur.commit()
+    con.commit()
+    """
+def test_qitable():
+    print 'test qitable'
+    qit = 'query_image_table.db3'
+    con = sqlite3.connect(qit)
+    cur = con.cursor()
+"""
 if __name__ == "__main__":
     # query_existed()
     # query_search_test()
     make_qitable()
+   """ test_qitable()"""
