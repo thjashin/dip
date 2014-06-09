@@ -35,6 +35,7 @@ def count():
             if l > max_len:
                 max_len = l
     print max_len
+
 def make_qitable():
     print 'make qitable'
     qit = '../database/query_image_table.db3'
@@ -51,6 +52,7 @@ def make_qitable():
         commond = 'INSERT INTO qit(query, image, click) VALUES(' + query + ',' + image + ',' + click + ')'
         cur.execute(command)
     con.commit()
+
 if __name__ == "__main__":
     # query_existed()
     # query_search_test()
