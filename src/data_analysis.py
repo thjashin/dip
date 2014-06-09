@@ -101,7 +101,7 @@ def get_vocabulary():
     print 'tokenize...'
     sys.stdout.flush()
     pre_tokens = []
-    sentences = [sent for sent in nltk.sent_tokenize(query_doc)]
+    sentences = [sent for sent in nltk.sent_tokenize(query_doc_str)]
     print 'number of sentences', len(sentences)
     sys.stdout.flush()
     for sent in sentences:
