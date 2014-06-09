@@ -20,11 +20,12 @@ def create_index():
             arr = line.strip().split('\t')
             image = arr[0].strip()
             query = arr[1].strip()
-            if ((last_image != None) and (image != last_image)):
+            if ((last_image is None) or (image != last_image)):
                 print last_image
                 print query_doc
                 break
-                writer.add_document(img=last_image, query_doc=query_doc)
+                if (last_image is not None):
+                    writer.add_document(img=last_image, query_doc=query_doc)
                 last_image = image
                 query_doc = []
             try:
