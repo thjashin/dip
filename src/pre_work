@@ -65,7 +65,8 @@ def test_qitable():
     query = '"black history month"'
     cmd = 'select * from qit where query=%s' %query
     cur.execute(cmd)
-    print cu.fetchall()
+    con.commit()
+    print cur.fetchall()
 
 if __name__ == "__main__":
     # query_existed()
