@@ -53,6 +53,7 @@ def make_qitable():
             query = '"%s"' % arr[1].strip()
             click = arr[2].strip()
             cmd = 'INSERT INTO qit(query, image, click) VALUES(%s,%s,%s)' %(query,image,click)
+            print cmd
             cur.execute(cmd)
     con.commit()
 
