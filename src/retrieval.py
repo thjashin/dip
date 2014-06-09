@@ -20,7 +20,7 @@ def create_index():
             arr = line.strip().split('\t')
             image = arr[0].strip()
             query = arr[1].strip()
-            if (image != last_image):
+            if ((last_image != None) and (image != last_image)):
                 print last_image
                 print query_doc
                 break
