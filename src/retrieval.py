@@ -3,6 +3,8 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # @file: retrieval.py
 
+import sys
+
 from whoosh.index import create_in
 from whoosh.fields import *
 
@@ -13,7 +15,9 @@ def create_index():
     ix = create_in(index_dir, schema)
     writer = ix.writer()
 
+    counter = 0
     with open(train_click_log, 'r') as f:
+        image = None
         last_image = None
         query_doc = []
         for line in f:
@@ -21,9 +25,9 @@ def create_index():
             image = arr[0].strip()
             query = arr[1].strip()
             if ((last_image is None) or (image != last_image)):
-                print last_image
-                print query_doc
-                break
+                counter += 1
+                sys.stdout.write('\r%d ...' % counter)
+                sys.stdout.flush()
                 if (last_image is not None):
                     writer.add_document(img=last_image, query_doc=query_doc)
                 last_image = image
@@ -33,8 +37,12 @@ def create_index():
             except UnicodeError:
                 pass
 
-        writer.add_document(img=image, query_doc=u' '.join(query_doc))
-        writer.commit()
+        if (image is not None):
+            writer.add_document(img=image, query_doc=u' '.join(query_doc))
+            writer.commit()
+
+        sys.stdout.write('\rfinished!\n')
+        sys.stdout.flush()
 
 
 if __name__ == "__main__":
