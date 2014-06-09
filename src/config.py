@@ -22,7 +22,10 @@ dev_label = pjoin(dev_dir, 'DevSetLabel.tsv')
 data_dir = 'data/'
 
 # query doc
-query_doc = pjoin(data_dir, 'query_doc.txt')
+query_file = pjoin(data_dir, 'query_doc.txt')
 
 # vocabulary file
 vocab_file = pjoin(data_dir, 'vocab.txt')
+
+# index dir
+index_dir = 'whoosh_index'

@@ -73,12 +73,15 @@ def query_search_test():
 
 
 def get_vocabulary():
+    """
+    remained/before: 866444 / 866545
+    """
     print 'get queries in train set...'
     sys.stdout.flush()
 
     query_doc_existed = False
     try:
-        with open(query_doc, 'r') as f:
+        with open(query_file, 'r') as f:
             query_doc_str = f.read()
         query_doc_existed = True
     except Exception:
@@ -95,7 +98,7 @@ def get_vocabulary():
         print 'write to query doc file...'
         sys.stdout.flush()
         query_doc_str = ' '.join(train_queries)
-        with open(query_doc, 'w') as f:
+        with open(query_file, 'w') as f:
             f.write(query_doc_str)
 
     print 'tokenize...'
