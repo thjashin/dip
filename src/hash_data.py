@@ -23,6 +23,8 @@ def hash_raw_to_dict():
                             hashcode = arr[1].strip()
                         except:
                             print arr
+                            print line
+                            print name
                             break
                         img2hash[imgname] = hashcode
 
@@ -46,6 +48,6 @@ hash_dict = get_hash_dict()
 
 
 if __name__ == "__main__":
-    for k, v in hash_dict:
+    for k, v in hash_dict.iteritems:
         print k, v
         break
