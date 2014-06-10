@@ -19,13 +19,7 @@ def hash_raw_to_dict():
                     if line.strip():
                         arr = line.strip().split(' ')
                         imgname = arr[0].strip()
-                        try:
-                            hashcode = arr[1].strip()
-                        except:
-                            print arr
-                            print line
-                            print name
-                            break
+                        hashcode = arr[1].strip()
                         img2hash[imgname] = hashcode
 
     with open(hash_dict_file, 'w') as f:
