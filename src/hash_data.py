@@ -18,6 +18,8 @@ def hash_raw_to_dict():
                 for line in f:
                     if line.strip():
                         arr = line.strip().split(' ')
+                        print arr
+                        break
                         imgname = arr[0].strip()
                         hashcode = arr[1].strip()
                         img2hash[imgname] = hashcode
