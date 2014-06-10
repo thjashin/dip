@@ -52,7 +52,7 @@ def make_qitable():
             image = '"%s"' % arr[0].strip()
             #'"%s, %s"' % (1, 2)
             #image = '"' + arr[0].strip() + '"'
-            query = '"%s"' % arr[1].replace('"', '')
+            query = '"%s"' % arr[1].strip().replace('"', '')
             click = arr[2].strip()
             cmd = 'INSERT INTO qit(query, image, click) VALUES(%s,%s,%s)' %(query,image,click)
             print num, ':', cmd
