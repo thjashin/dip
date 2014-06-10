@@ -98,7 +98,7 @@ def get_query_table(con, image):
     s = set()
     for row in cur:
         s.add(row[0])
-
+    return s
 
 def get_similar_querys(con, query):
     image_table = get_image_table(con, query)
