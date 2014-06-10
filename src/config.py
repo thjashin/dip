@@ -34,5 +34,5 @@ index_dir = 'whoosh_index'
 hash_dir = pjoin(data_dir, 'hash')
 
 # hash dictionary
-hash_dict_file = pjoin(data_dir, 'hash_dict')
-
+hash2img_file = pjoin(data_dir, 'hash2img')
+img2hash_file = pjoin(data_dir, 'img2hash')
