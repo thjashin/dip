@@ -75,4 +75,4 @@ def test_qitable():
 if __name__ == "__main__":
     # query_existed()
     # query_search_test()
-    test_qitable()
+    make_qitable()
