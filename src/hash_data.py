@@ -8,7 +8,6 @@ import cPickle as pickle
 
 from config import *
 
-hash_dict = get_hash_dict()
 
 def hash_raw_to_dict():
     img2hash = dict()
@@ -37,6 +36,9 @@ def get_hash_dict():
         return _hash_dict
     except Exception:
         return hash_raw_to_dict()
+
+
+hash_dict = get_hash_dict()
 
 
 if __name__ == "__main__":
