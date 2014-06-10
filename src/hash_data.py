@@ -8,6 +8,8 @@ import cPickle as pickle
 
 from config import *
 
+hash_dict = hash_dict()
+
 def hash_raw_to_dict():
     img2hash = dict()
     for name in os.listdir(hash_dir):
@@ -29,9 +31,15 @@ def hash_raw_to_dict():
 
 def hash_dict():
     try:
-        hash_dict = None
+        _hash_dict = None
         with open(hash_dict_file, 'w') as f:
-            hash_dict = pickle.load(f)
-        return hash_dict
+            _hash_dict = pickle.load(f)
+        return _hash_dict
     except Exception:
         return hash_raw_to_dict()
+
+
+if __name__ == "__main__":
+    for k, v in hash_dict:
+        print k, v
+        break
