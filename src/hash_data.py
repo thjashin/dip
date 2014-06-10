@@ -42,7 +42,6 @@ hash_dict = get_hash_dict()
 
 
 if __name__ == "__main__":
-    global hash_dict
     for k, v in hash_dict:
         print k, v
         break
