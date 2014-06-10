@@ -29,3 +29,10 @@ vocab_file = pjoin(data_dir, 'vocab.txt')
 
 # index dir
 index_dir = 'whoosh_index'
+
+# hash raw data
+hash_dir = pjoin(data_dir, 'hash')
+
+# hash dictionary
+hash_dict_file = pjoin(data_dir, 'hash_dict')
+
