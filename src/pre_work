@@ -110,7 +110,7 @@ def get_similar_querys(con, query):
         for q in t:
             if q not in similar_query_table:
                 it = get_image_table(con, q)
-                similar_query_table[q] = (0, 0, 0, it, 0)
+                similar_query_table[q] = [0, 0, 0, it, 0]
             r_q_i = similar_query_table[q][3][3][image]
             r_q = similar_query_table[q][3][2]
             r_query_i = image_table[3][image]
