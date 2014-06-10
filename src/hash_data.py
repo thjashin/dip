@@ -8,7 +8,7 @@ import cPickle as pickle
 
 from config import *
 
-hash_dict = hash_dict()
+hash_dict = get_hash_dict()
 
 def hash_raw_to_dict():
     img2hash = dict()
@@ -29,7 +29,7 @@ def hash_raw_to_dict():
     return img2hash
 
 
-def hash_dict():
+def get_hash_dict():
     try:
         _hash_dict = None
         with open(hash_dict_file, 'w') as f:
@@ -40,6 +40,7 @@ def hash_dict():
 
 
 if __name__ == "__main__":
+    global hash_dict
     for k, v in hash_dict:
         print k, v
         break
