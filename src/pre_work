@@ -38,16 +38,16 @@ def count():
 
 def make_qitable():
     print 'make qitable'
-    qit = '../database/query_image_table1.db3'
+    qit = '../database/query_image_table.db3'
     con = sqlite3.connect(qit)
     cur = con.cursor()
     cur.execute('CREATE TABLE qit(query TEXT, image TEXT, click INTEGER)')
     con.commit()
     fileName = train_click_log
-    num = 0
+    #num = 0
     with open(fileName, 'r') as f:
         for line in f:
-            num = num + 1
+            #num = num + 1
             arr = line.strip().split('\t')
             image = '"%s"' % arr[0].strip()
             #'"%s, %s"' % (1, 2)
@@ -55,10 +55,10 @@ def make_qitable():
             query = '"%s"' % arr[1].strip().replace('"', '')
             click = arr[2].strip()
             cmd = 'INSERT INTO qit(query, image, click) VALUES(%s,%s,%s)' %(query,image,click)
-            print num, ':', cmd
+            #print num, ':', cmd
             cur.execute(cmd)
-            if num > 100:
-                break
+            #if num > 100:
+            #    break
     con.commit()
 
 def test_qitable():
