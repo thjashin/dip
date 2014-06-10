@@ -12,3 +12,4 @@ Thumbs.db
 /dumps/
 /data/
 /lib/
+/whoosh_index/
