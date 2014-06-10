@@ -5,6 +5,7 @@
 
 from __future__ import division
 import sys
+import math
 
 import ngram
 import nltk
@@ -61,15 +62,17 @@ def make_qitable():
             #    break
     con.commit()
 
+
 def get_r(k):
     return k
 
-def get_table(query):
+
+def get_image_table(con, query):
     print 'test qitable'
-    qit = '../database/query_image_table.db3'
-    con = sqlite3.connect(qit)
+    query = '"%s"' % query
+    print query
     cur = con.cursor()
-    cmd = 'select * from qit where query=%s' %query
+    cmd = 'select * from qit where query=%s' % query
     print cmd
     cur.execute(cmd)
     num = 0
@@ -84,10 +87,63 @@ def get_table(query):
     r = (query, num, ave, dic)
     return r
 
+
+def get_query_table(con, image):
+    image = '"%s"' % image
+    print image
+    cur = con.cursor()
+    cmd = 'select * from qit where image=%s' % image
+    print cmd
+    cur.execute(cmd)
+    s = set()
+    for row in cur:
+        s.add(row[0])
+
+
+def get_similar_querys(con, query):
+    image_table = get_image_table(con, query)
+    similar_query_table = {}
+    for image in image_table[3].keys():
+        t = get_query_table(con, image)
+        for q in t:
+            if q not in similar_query_table:
+                it = get_image_table(con, q)
+                similar_query_table[q] = (0, 0, 0, it, 0)
+            r_q_i = similar_query_table[q][3][3][image]
+            r_q = similar_query_table[q][3][2]
+            r_query_i = image_table[3][image]
+            r_query = image_table[2]
+            similar_query_table[q][0] = (
+                similar_query_table[q][0] +
+                (r_q_i - r_q) * (r_query_i - r_query)
+            )
+            similar_query_table[q][1] = (
+                similar_query_table[q][1] +
+                (r_q_i - r_q) * (r_q_i - r_q)
+            )
+            similar_query_table[q][2] = (
+                similar_query_table[q][2] +
+                (r_query_i - r_query) * (r_query_i - r_query)
+            )
+    for q in similar_query_table.keys():
+        similar_query_table[q][4] = (
+            similar_query_table[q][0] / (
+                math.sqrt(similar_query_table[q][1])
+                * math.sqrt(similar_query_table[q][2])
+            )
+        )
+    return similar_query_table
+
 if __name__ == "__main__":
     # query_existed()
     # query_search_test()
-    query = '\"black history month\"'
+    query = 'black history month'
+    qit = '../database/query_image_table.db3'
+    con = sqlite3.connect(qit)
+    similar_qt = get_similar_querys(con, query)
+    for q in similar_qt.keys():
+        print q, similar_qt[q][4]
+    """
     r = get_table(query)
     print r[0]
     print r[1]
@@ -98,4 +154,4 @@ if __name__ == "__main__":
         print image
     print "clicks"
     for click in dic.values():
-        print click
+        print click"""
