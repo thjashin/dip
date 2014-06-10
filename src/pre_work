@@ -81,7 +81,7 @@ def get_image_table(con, query):
     for row in cur:
         num = num + 1
         ave = ave + get_r(row[2])
-        #print row[0],',',row[1],',',row[2]
+        print row[0], ',', row[1], ',', row[2]
         dic[row[1]] = get_r(row[2])
     ave = ave / num
     r = (query, num, ave, dic)
@@ -102,8 +102,10 @@ def get_query_table(con, image):
 
 def get_similar_querys(con, query):
     image_table = get_image_table(con, query)
+    print "ok"
     similar_query_table = {}
     for image in image_table[3].keys():
+        print image
         t = get_query_table(con, image)
         for q in t:
             if q not in similar_query_table:
