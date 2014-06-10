@@ -73,7 +73,7 @@ def test_qitable():
     num = 0
     for row in cur:
         num = num + 1
-        print row[0],  ',', row[1], ',', row[2]
+        print row[0],',',row[1],',',row[2]
     print num
 
 if __name__ == "__main__":
