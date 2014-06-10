@@ -61,22 +61,41 @@ def make_qitable():
             #    break
     con.commit()
 
-def test_qitable():
+def get_r(k):
+    return k
+
+def get_table(query):
     print 'test qitable'
     qit = '../database/query_image_table.db3'
     con = sqlite3.connect(qit)
     cur = con.cursor()
-    query = '\"black history month\"'
     cmd = 'select * from qit where query=%s' %query
     print cmd
     cur.execute(cmd)
     num = 0
+    ave = 0
+    dic = {}
     for row in cur:
         num = num + 1
-        print row[0],',',row[1],',',row[2]
-    print num
+        ave = ave + get_r(row[2])
+        #print row[0],',',row[1],',',row[2]
+        dic[row[1]] = get_r(row[2])
+    ave = ave / num
+    r = (query, num, ave, dic)
+    return r
 
 if __name__ == "__main__":
     # query_existed()
     # query_search_test()
-    test_qitable()
+    query = '\"black history month\"'
+    r = get_table(query)
+    print r[0]
+    print r[1]
+    print r[2]
+    dic = r[3]
+    print "images"
+    for image in dic.keys():
+        print image
+    print "clicks"
+    for click in dic.values():
+        print click
