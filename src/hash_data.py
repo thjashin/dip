@@ -42,6 +42,6 @@ hash_dict = get_hash_dict()
 
 
 if __name__ == "__main__":
-    for k, v in hash_dict.iteritems:
+    for k, v in hash_dict.iteritems():
         print k, v
         break
