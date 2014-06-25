@@ -134,7 +134,7 @@ def get_hash2img():
             print name, gist_v
             break
         with open(img2hash_file, 'wb') as f:
-            pickle.dump(lsh)
+            pickle.dump(lsh, f)
         return lsh
 
 
