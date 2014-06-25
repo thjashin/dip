@@ -12,7 +12,8 @@ from whoosh.query import *
 from whoosh.qparser import QueryParser
 import leargist
 from PIL import Image
-from lshash import LSHash
+from nearpy import Engine
+from nearpy.hashes import RandomBinaryProjections
 from cropresize import crop_resize
 
 from config import *
@@ -118,34 +119,36 @@ def get_img2gist():
 def get_hash2img():
     img2gist = get_img2gist()
     try:
-        lsh = None
+        engine = None
         with open(img2hash_file, 'rb') as f:
-            lsh = pickle.load(f)
-        return lsh
+            engine = pickle.load(f)
+        return engine
     except Exception:
-        lsh = LSHash(128, 960)
+        dimension = 960
+        rbp = RandomBinaryProjections('rbp', 10)
+        engine = Engine(dimension, lshashes=[rbp])
         count = 0
         total_num = len(img2gist)
         for name, gist_v in img2gist.iteritems():
             count += 1
-            lsh.index(gist_v, extra_data=name)
+            engine.store_vector(v, name)
             sys.stdout.write('%d/%d\r    ' % (count, total_num))
             sys.stdout.flush()
         with open(img2hash_file, 'wb') as f:
-            pickle.dump(lsh, f)
-        return lsh
+            pickle.dump(engine, f)
+        return engine
 
 
-lsh = get_hash2img()
+engine = get_hash2img()
 
 
 def gist_top10_images(img):
-    global lsh
+    global engine
     im = Image.open(img)
     im = crop_resize(im, normal_size, True)
     desc = leargist.color_gist(im)
-    res = lsh.query(desc, num_results=10, distance_func='euclidean')
-    print res
+    res = engine.neighbors(desc)
+    print res[:10]
 
 if __name__ == "__main__":
     # create_index()

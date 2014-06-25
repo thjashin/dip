@@ -20,6 +20,14 @@ dev_dir = '/opt/dip-data/Dev'
 # dev files
 dev_label = pjoin(dev_dir, 'DevSetLabel.tsv')
 
+# trial dir
+trial_dir = 'trial/'
+trial_images_dir = pjoin(trial_dir, 'images')
+
+# trial files
+trial_click_log = pjoin(trial_dir, 'IRC2014MMTrial.keyquery.tsv')
+trial_file_map = pjoin(trial_dir, 'images_map.tsv')
+
 # -----------------------------------------------------------------------------
 # data dir
 data_dir = 'data/'
