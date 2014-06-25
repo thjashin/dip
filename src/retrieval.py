@@ -106,12 +106,10 @@ def get_img2gist():
                     im = Image.open(pjoin(train_images_dir, rpath))
                     im = crop_resize(im, normal_size, True)
                     desc = leargist.color_gist(im)
-                    print name, desc
                     img2gist[name] = desc
                     sys.stdout.write(
                         '%d/%d\r size:(%d, %d)    ' % (count, total_num, im.size[0], im.size[1]))
                     sys.stdout.flush()
-                    break
         with open(name2gist_file, 'wb') as f:
             pickle.dump(img2gist, f)
         return img2gist
