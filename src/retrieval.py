@@ -13,7 +13,7 @@ from whoosh.qparser import QueryParser
 import leargist
 from PIL import Image
 from nearpy import Engine
-from nearpy.filters import
+from nearpy.filters import NearestFilter
 from nearpy.hashes import RandomBinaryProjections
 from cropresize import crop_resize
 
