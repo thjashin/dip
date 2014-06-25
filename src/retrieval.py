@@ -115,14 +115,46 @@ def get_img2gist():
         return img2gist
 
 
-def gist_top10_images(img):
-    im = Image.open(img)
-    desc = leargist.color_gist(im)
-    lsh = LSHash(matrices_filename=hash_index_file)
+def get_hash2img():
+    img2gist = get_img2gist()
+    try:
+        lsh = None
+        with open(img2hash_file, 'rb') as f:
+            lsh = pickle.load(f)
+        return lsh
+    except Exception:
+        lsh = LSHash(128, 960)
+        count = 0
+        total_num = len(img2gist)
+        for name, gist_v in img2gist.iteritems():
+            count += 1
+            lsh.index(gist_v, extra_data=name)
+            sys.stdout.write('%d/%d\r    ' % (count, total_num))
+            sys.stdout.flush()
+            print name, gist_v
+            break
+        with open(img2hash_file, 'wb') as f:
+            pickle.dump(lsh)
+        return lsh
 
+
+lsh = get_hash2img()
+
+
+def gist_top10_images(img):
+    global lsh
+    im = Image.open(img)
+    im = crop_resize(im, normal_size, True)
+    desc = leargist.color_gist(im)
+    res = lsh.query(desc, num_results=10, distance_func='euclidean')
+    print res
 
 if __name__ == "__main__":
     # create_index()
     # test_search()
     # print query_top10_images('black history')
-    get_img2gist()
+    # get_img2gist()
+
+    # top should be +FG2AXmgIIbP8Q
+    path = pjoin(train_images_dir, '11f/4e2006aa6911d7314c96a57f7d572.jpg')
+    gist_top10_images(path)
