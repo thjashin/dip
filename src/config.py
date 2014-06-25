@@ -45,4 +45,4 @@ img2hash_file = pjoin(data_dir, 'img2hash')
 
 # -----------------------------------------------------------------------------
 # gist image size
-normal_size = (128, 128)
+normal_size = (64, 64)
