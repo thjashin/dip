@@ -131,8 +131,6 @@ def get_hash2img():
             lsh.index(gist_v, extra_data=name)
             sys.stdout.write('%d/%d\r    ' % (count, total_num))
             sys.stdout.flush()
-            print name, gist_v
-            break
         with open(img2hash_file, 'wb') as f:
             pickle.dump(lsh, f)
         return lsh
