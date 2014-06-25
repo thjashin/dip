@@ -13,6 +13,7 @@ from whoosh.qparser import QueryParser
 import leargist
 from PIL import Image
 from lshash import LSHash
+from cropresize import crop_resize
 
 from config import *
 
@@ -103,6 +104,7 @@ def get_img2gist():
                     name = arr[0].strip()
                     rpath = arr[1].strip()
                     im = Image.open(pjoin(train_images_dir, rpath))
+                    im = crop_resize(im, normal_size, True)
                     desc = leargist.color_gist(im)
                     img2gist[name] = desc
                     sys.stdout.write(

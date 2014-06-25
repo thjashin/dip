@@ -42,3 +42,7 @@ hash_dir = pjoin(data_dir, 'hash')
 # hash dictionary
 hash2img_file = pjoin(data_dir, 'hash2img')
 img2hash_file = pjoin(data_dir, 'img2hash')
+
+# -----------------------------------------------------------------------------
+# gist image size
+normal_size = (128, 128)
