@@ -147,7 +147,7 @@ def gist_top10_images(img):
     im = Image.open(img)
     im = crop_resize(im, normal_size, True)
     desc = leargist.color_gist(im)
-    res = engine.neighbors(desc)
+    res = engine.neighbours(desc)
     print res[:10]
 
 if __name__ == "__main__":
