@@ -8,9 +8,11 @@ pjoin = os.path.join
 
 # train dir
 train_dir = '/opt/dip-data/Train'
+train_images_dir = pjoin(train_dir, 'images')
 
 # train files
 train_click_log = pjoin(train_dir, 'TrainClickLog.tsv')
+train_file_map = pjoin(train_dir, 'images_map.tsv')
 
 # dev dir
 dev_dir = '/opt/dip-data/Dev'
@@ -18,8 +20,12 @@ dev_dir = '/opt/dip-data/Dev'
 # dev files
 dev_label = pjoin(dev_dir, 'DevSetLabel.tsv')
 
+# -----------------------------------------------------------------------------
 # data dir
 data_dir = 'data/'
+
+# image name to gist feature
+name2gist_file = pjoin(data_dir, 'img2gist')
 
 # query doc
 query_file = pjoin(data_dir, 'query_doc.txt')
