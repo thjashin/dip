@@ -125,7 +125,7 @@ def get_hash2img():
         return engine
     except Exception:
         dimension = 960
-        rbp = RandomBinaryProjections('rbp', 10)
+        rbp = RandomBinaryProjections('rbp', 128)
         engine = Engine(dimension, lshashes=[rbp])
         count = 0
         total_num = len(img2gist)
