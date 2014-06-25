@@ -13,6 +13,7 @@ from whoosh.qparser import QueryParser
 import leargist
 from PIL import Image
 from nearpy import Engine
+from nearpy.filters import
 from nearpy.hashes import RandomBinaryProjections
 from cropresize import crop_resize
 
@@ -131,7 +132,7 @@ def get_hash2img():
         total_num = len(img2gist)
         for name, gist_v in img2gist.iteritems():
             count += 1
-            engine.store_vector(v, name)
+            engine.store_vector(gist_v, name)
             sys.stdout.write('%d/%d\r    ' % (count, total_num))
             sys.stdout.flush()
         with open(img2hash_file, 'wb') as f:
@@ -148,7 +149,7 @@ def gist_top10_images(img):
     im = crop_resize(im, normal_size, True)
     desc = leargist.color_gist(im)
     res = engine.neighbours(desc)
-    print res[:10]
+    print res
 
 if __name__ == "__main__":
     # create_index()
