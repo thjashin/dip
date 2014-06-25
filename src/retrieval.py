@@ -106,7 +106,7 @@ def get_img2gist():
                     desc = leargist.color_gist(im)
                     img2gist[name] = desc
                     sys.stdout.write(
-                        '%d/%d\r size:(%d, %d)    ' % (im.size[0], im.size[1], count, total_num))
+                        '%d/%d\r size:(%d, %d)    ' % (count, total_num, im.size[0], im.size[1]))
                     sys.stdout.flush()
         with open(name2gist_file, 'wb') as f:
             pickle.dump(img2gist, f)
