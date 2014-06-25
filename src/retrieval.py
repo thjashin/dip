@@ -103,7 +103,7 @@ def get_img2gist():
                     name = arr[0].strip()
                     rpath = arr[1].strip()
                     im = Image.open(pjoin(train_images_dir, rpath))
-                    desc = leargist.color_gist(im)
+                    desc = leargist.color_gist(im, nblocks=2)
                     img2gist[name] = desc
                     sys.stdout.write('%d/%d\r' % (count, total_num))
                     sys.stdout.flush()
