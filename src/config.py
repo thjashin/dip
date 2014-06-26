@@ -55,7 +55,7 @@ redis_cofig = {'redis': {'host': 'localhost', 'port': 6379}}
 redis_rdb = 'dump.rdb'
 
 # saved LSH random values
-matrices_file = 'matrices'
+matrices_file = 'matrices.npz'
 
 # -----------------------------------------------------------------------------
 # gist image size

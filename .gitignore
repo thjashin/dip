@@ -9,6 +9,9 @@
 tags
 Thumbs.db
 *.db3
+*.jpg
+*.rdb
+*.npz
 /dumps/
 /data/
 /lib/
