@@ -49,7 +49,7 @@ hash2img_file = pjoin(data_dir, 'hash2img')
 img2hash_file = pjoin(data_dir, 'img2hash')
 
 # redis config
-redis_cofig = {'redis': {'host': 'localhost', 'port': 6379}}
+redis_config = {'redis': {'host': 'localhost', 'port': 6379}}
 
 # redis persistence file
 redis_rdb = 'dump.rdb'
