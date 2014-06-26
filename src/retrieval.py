@@ -12,9 +12,7 @@ from whoosh.query import *
 from whoosh.qparser import QueryParser
 import leargist
 from PIL import Image
-from nearpy import Engine
-from nearpy.filters import NearestFilter
-from nearpy.hashes import RandomBinaryProjections
+from lshash import LSHash
 from cropresize import crop_resize
 
 from config import *
@@ -88,6 +86,8 @@ def get_img2gist():
     try:
         img2gist = None
         with open(name2gist_file, 'rb') as f:
+            print 'loading existed img2gist...'
+            sys.stdout.flush()
             img2gist = pickle.load(f)
         return img2gist
     except Exception:
@@ -117,38 +117,38 @@ def get_img2gist():
         return img2gist
 
 
-def get_hash2img():
+def create_hash2img():
     img2gist = get_img2gist()
-    try:
-        engine = None
-        with open(img2hash_file, 'rb') as f:
-            engine = pickle.load(f)
-        return engine
-    except Exception:
-        dimension = 960
-        rbp = RandomBinaryProjections('rbp', 128)
-        engine = Engine(dimension, lshashes=[rbp])
-        count = 0
-        total_num = len(img2gist)
-        for name, gist_v in img2gist.iteritems():
-            count += 1
-            engine.store_vector(gist_v, name)
-            sys.stdout.write('%d/%d\r    ' % (count, total_num))
-            sys.stdout.flush()
-        with open(img2hash_file, 'wb') as f:
-            pickle.dump(engine, f)
-        return engine
+    lsh = LSHash(128, 960, storage_config=redis_config,
+                 matrices_filename=matrices_file)
+    count = 0
+    total_num = len(img2gist)
+    for name, gist_v in img2gist.iteritems():
+        count += 1
+        lsh.index(gist_v, name)
+        sys.stdout.write('%d/%d\r    ' % (count, total_num))
+        sys.stdout.flush()
+    return lsh
 
 
-engine = get_hash2img()
+def get_hash2img():
+    if os.path.exists(redis_rdb):
+        lsh = LSHash(128, 960, storage_config=redis_config,
+                     matrices_filename=matrices_file)
+        return lsh
+    else:
+        return create_hash2img()
+
+
+lsh = get_hash2img()
 
 
 def gist_top10_images(img):
-    global engine
+    global lsh
     im = Image.open(img)
     im = crop_resize(im, normal_size, True)
     desc = leargist.color_gist(im)
-    res = engine.neighbours(desc)
+    res = lsh.query(desc, num_results=10)
     print res
 
 if __name__ == "__main__":
