@@ -129,7 +129,7 @@ def create_hash2img():
         sys.stdout.write('%d/%d\r    ' % (count, total_num))
         sys.stdout.flush()
 
-    print 'bucket ratio:', len(lsh.hash_tables[0].keys()) / 2 ** 16
+    print 'bucket ratio: %d/%d' % (len(lsh.hash_tables[0].keys()), 2 ** 16)
     return lsh
 
 
@@ -148,7 +148,7 @@ lsh = get_hash2img()
 def gist_top10_images(img):
     global lsh
     # info of known dataset
-    print 'bucket ratio:', len(lsh.hash_tables[0].keys()) / 2 ** 16
+    print 'bucket ratio: %d/%d' % (len(lsh.hash_tables[0].keys()), 2 ** 16)
 
     im = Image.open(img)
     im = crop_resize(im, normal_size, True)
