@@ -148,6 +148,7 @@ lsh = get_hash2img()
 def gist_top10_images(img):
     global lsh
     # info of known dataset
+    print lsh.hash_tables[0].keys()[0]
     print 'bucket ratio: %d/%d' % (len(lsh.hash_tables[0].keys()), 2 ** 16)
 
     im = Image.open(img)
