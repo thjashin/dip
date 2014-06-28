@@ -148,7 +148,7 @@ def gist_top10_images(img):
     im = Image.open(img)
     im = crop_resize(im, normal_size, True)
     desc = leargist.color_gist(im)
-    res = lsh.query(desc, num_results=2)
+    res = lsh.query(desc, num_results=0)
     print 'num of results:', len(res)
     print res
 
