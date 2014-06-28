@@ -128,6 +128,7 @@ def create_hash2img():
         lsh.index(gist_v, name)
         sys.stdout.write('%d/%d\r    ' % (count, total_num))
         sys.stdout.flush()
+        break
 
     print 'bucket ratio: %d/%d' % (len(lsh.hash_tables[0].keys()), 2 ** 16)
     return lsh
