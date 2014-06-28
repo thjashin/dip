@@ -119,7 +119,7 @@ def get_img2gist():
 
 def create_hash2img():
     img2gist = get_img2gist()
-    lsh = LSHash(128, 960, storage_config=redis_config,
+    lsh = LSHash(16, 960, storage_config=redis_config,
                  matrices_filename=matrices_file)
     count = 0
     total_num = len(img2gist)
@@ -128,12 +128,14 @@ def create_hash2img():
         lsh.index(gist_v, name)
         sys.stdout.write('%d/%d\r    ' % (count, total_num))
         sys.stdout.flush()
+
+    print 'bucket ratio:', len(lsh.hash_tables[0].keys()) / 2 ** 16
     return lsh
 
 
 def get_hash2img():
     if os.path.exists(redis_rdb):
-        lsh = LSHash(128, 960, storage_config=redis_config,
+        lsh = LSHash(16, 960, storage_config=redis_config,
                      matrices_filename=matrices_file)
         return lsh
     else:
@@ -145,6 +147,9 @@ lsh = get_hash2img()
 
 def gist_top10_images(img):
     global lsh
+    # info of known dataset
+    print 'bucket ratio:', len(lsh.hash_tables[0].keys()) / 2 ** 16
+
     im = Image.open(img)
     im = crop_resize(im, normal_size, True)
     desc = leargist.color_gist(im)
