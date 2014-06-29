@@ -24,8 +24,8 @@ def get_name2path():
                 name = arr[0].strip()
                 rpath = arr[1].strip()
                 ret[name] = rpath
-                sys.stdout.write('%d/%d\r     ' % (count, total_num))
-                sys.stdout.flush()
+                # sys.stdout.write('%d/%d\r     ' % (count, total_num))
+                # sys.stdout.flush()
     return ret
 
 name2path = get_name2path()
