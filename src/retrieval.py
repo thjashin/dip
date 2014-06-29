@@ -14,6 +14,7 @@ import leargist
 from PIL import Image
 from lshash import LSHash
 from cropresize import crop_resize
+import json
 
 from config import *
 
@@ -158,7 +159,8 @@ def gist_top10_images(img):
         desc[i] += 0.01
     res = lsh.query(desc, num_results=None, distance_func="hamming")
     print 'num of results:', len(res)
-    print res
+    for i in res:
+        print json.loads(i[0])[1], i[1]
 
 if __name__ == "__main__":
     # create_index()
