@@ -60,3 +60,6 @@ matrices_file = 'matrices.npz'
 # -----------------------------------------------------------------------------
 # gist image size
 normal_size = (32, 32)
+
+# length of hash
+hash_len = 32

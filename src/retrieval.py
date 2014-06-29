@@ -120,7 +120,7 @@ def get_img2gist():
 
 def create_hash2img():
     img2gist = get_img2gist()
-    lsh = LSHash(32, 960, storage_config=redis_config,
+    lsh = LSHash(hash_len, 960, storage_config=redis_config,
                  matrices_filename=matrices_file)
     count = 0
     total_num = len(img2gist)
@@ -130,13 +130,13 @@ def create_hash2img():
         sys.stdout.write('%d/%d\r    ' % (count, total_num))
         sys.stdout.flush()
 
-    print 'bucket ratio: %d/%d' % (len(lsh.hash_tables[0].keys()), 2 ** 16)
+    print 'bucket ratio: %d/%d' % (len(lsh.hash_tables[0].keys()), 2 ** hash_len)
     return lsh
 
 
 def get_hash2img():
     if os.path.exists(redis_rdb):
-        lsh = LSHash(32, 960, storage_config=redis_config,
+        lsh = LSHash(hash_len, 960, storage_config=redis_config,
                      matrices_filename=matrices_file)
         return lsh
     else:
@@ -150,7 +150,7 @@ def gist_top10_images(img):
     global lsh
     # info of known dataset
     print lsh.hash_tables[0].keys()[0]
-    print 'bucket ratio: %d/%d' % (len(lsh.hash_tables[0].keys()), 2 ** 32)
+    print 'bucket ratio: %d/%d' % (len(lsh.hash_tables[0].keys()), 2 ** hash_len)
     counts = []
     t = lsh.hash_tables[0]
     for k in t.keys():
