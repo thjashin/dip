@@ -154,6 +154,7 @@ def gist_top10_images(img):
     counts = []
     t = lsh.hash_tables[0]
     for k in t.keys():
+        print k
         counts.append(len(t.get_val(k)))
     print 'max conflicts:', max(counts)
 
