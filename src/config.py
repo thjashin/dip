@@ -48,6 +48,11 @@ index_dir = 'whoosh_index'
 hash2img_file = pjoin(data_dir, 'hash2img')
 img2hash_file = pjoin(data_dir, 'img2hash')
 
+# image name to path
+name2path = pjoin(data_dir, 'name2path')
+
+# -----------------------------------------------------------------------------
+
 # redis config
 redis_config = {'redis': {'host': 'localhost', 'port': 6379}}
 
