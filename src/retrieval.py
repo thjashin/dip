@@ -147,15 +147,20 @@ lsh = get_hash2img()
 
 
 def gist_top10_images(img):
+    """
+    32 bit hash:
+    bucket ratio: 225410/4294967296
+    max conflicts: 8691
+    """
     global lsh
     # info of known dataset
-    print lsh.hash_tables[0].keys()[0]
-    print 'bucket ratio: %d/%d' % (len(lsh.hash_tables[0].keys()), 2 ** hash_len)
-    counts = []
-    t = lsh.hash_tables[0]
-    for k in t.keys():
-        counts.append(len(t.get_list(k)))
-    print 'max conflicts:', max(counts)
+    # print lsh.hash_tables[0].keys()[0]
+    # print 'bucket ratio: %d/%d' % (len(lsh.hash_tables[0].keys()), 2 ** hash_len)
+    # counts = []
+    # t = lsh.hash_tables[0]
+    # for k in t.keys():
+    #     counts.append(len(t.get_list(k)))
+    # print 'max conflicts:', max(counts)
 
     im = Image.open(img)
     im = crop_resize(im, normal_size, True)
