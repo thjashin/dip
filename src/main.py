@@ -35,6 +35,7 @@ def main_proc(query, image_path):
     B = gist_top10_images(image_path)
     if not A:
         query_miss += 1
+        return np.random.rand()
     if not B:
         hash_miss += 1
     sim_set = []
@@ -95,6 +96,7 @@ def test_on_dev():
 
     print 'On Dev set'
     print 'Average DCG:', dcg
+    print 'total pairs:', total_count
     print 'Query miss:', query_miss
     print 'Hash miss:', hash_miss
 
