@@ -8,6 +8,7 @@ from config import *
 
 def get_name2path():
     ret = {}
+    total_num = 0
     with open(train_file_map, 'r') as f:
             for line in f:
                 if line.strip():
@@ -23,6 +24,7 @@ def get_name2path():
                 ret[name] = rpath
                 sys.stdout.write('%d/%d\r     ' % (count, total_num))
                 sys.stdout.flush()
+    return ret
 
 name2path = get_name2path()
 
