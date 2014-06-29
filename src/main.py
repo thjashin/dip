@@ -53,7 +53,7 @@ def test_on_dev():
     # load name2path
     name2path = get_name2path(dev_file_map)
 
-    rel_d = {'Excellent': 3, 'Good': 2, 'Bad': 0}
+    rel_d = {u'Excellent': 3, u'Good': 2, u'Bad': 0}
 
     total_count = 0
     with open(dev_label, 'r') as f:
@@ -69,7 +69,7 @@ def test_on_dev():
         count = 0
         for line in f:
             if line.split():
-                arr = line.strip().split()
+                arr = line.strip().split('\t')
                 query = arr[0].strip()
                 name = arr[1].strip()
                 rel = rel_d[arr[2].strip()]
