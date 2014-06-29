@@ -17,6 +17,7 @@ from cropresize import crop_resize
 import json
 
 from config import *
+from utils import name2path
 
 
 def create_index():
@@ -170,7 +171,8 @@ def gist_top10_images(img):
     res = lsh.query(desc, num_results=None, distance_func="hamming")
     print 'num of results:', len(res)
     for i in res:
-        print json.loads(i[0])[1], i[1]
+        name = json.loads(i[0])[1]
+        print name, name2path[name], i[1]
 
 if __name__ == "__main__":
     # create_index()
