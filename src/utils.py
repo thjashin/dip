@@ -28,7 +28,5 @@ def get_name2path(map_file):
                 # sys.stdout.flush()
     return ret
 
-name2path = get_name2path()
-
 if __name__ == "__main__":
     pass
