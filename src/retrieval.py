@@ -171,13 +171,13 @@ def gist_top10_images(img):
     desc = leargist.color_gist(im)
     # for i in xrange(len(desc)):
     #     desc[i] += 0.01
-    res = lsh.query(desc, num_results=None, distance_func="hamming")
+    res = lsh.query(desc, num_results=10, distance_func="hamming")
     # print 'num of results:', len(res)
     # for i in res:
     #     name = json.loads(i[0])[1]
     #     print name, name2path[name], i[1]
 
-    return [json.loads(i[0])[1] for i in res[:10]]
+    return [json.loads(i[0])[1] for i in res]
 
 if __name__ == "__main__":
     # create_index()

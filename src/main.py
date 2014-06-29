@@ -77,7 +77,7 @@ def test_on_dev():
                     num_of_queries += 1
                     qimgs.sort(lambda x, y: cmp(x[1], y[1]))
                     dcg += 0.01757 * \
-                        sum([(2 ** t[0] - 1) / np.log2(i + 1)
+                        sum([(2 ** t[0] - 1) / np.log2(i + 2)
                             for i, t in enumerate(qimgs[:25])])
                     qimgs = []
                 path = pjoin(dev_images_dir, name2path[name])
