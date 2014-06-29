@@ -155,7 +155,7 @@ def gist_top10_images(img):
     """
     global lsh
 
-    # name2path = get_name2path(train_file_map)
+    name2path = get_name2path(train_file_map)
 
     # info of known dataset
     # print lsh.hash_tables[0].keys()[0]
@@ -172,10 +172,10 @@ def gist_top10_images(img):
     # for i in xrange(len(desc)):
     #     desc[i] += 0.01
     res = lsh.query(desc, num_results=None, distance_func="hamming")
-    # print 'num of results:', len(res)
-    # for i in res:
-    #     name = json.loads(i[0])[1]
-    #     print name, name2path[name], i[1]
+    print 'num of results:', len(res)
+    for i in res:
+        name = json.loads(i[0])[1]
+        print name, name2path[name], i[1]
 
     return [json.loads(i[0])[1] for i in res[:10]]
 
