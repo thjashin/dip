@@ -27,7 +27,7 @@ def main_proc(query, image_path):
     """
     global query_miss, hash_miss
 
-    im = Image.open(image_path)
+    im = Image.open(pjoin(dev_images_dir, image_path))
     im = crop_resize(im, normal_size, True)
     desc = leargist.color_gist(im)
 
