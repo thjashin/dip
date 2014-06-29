@@ -27,7 +27,7 @@ def main_proc(query, image_path):
     """
     global query_miss, hash_miss
 
-    im = Image.open(pjoin(dev_images_dir, image_path))
+    im = Image.open(image_path)
     im = crop_resize(im, normal_size, True)
     desc = leargist.color_gist(im)
 
@@ -80,7 +80,8 @@ def test_on_dev():
                         sum([(2 ** t[0] - 1) / np.log2(i + 1)
                             for i, t in enumerate(qimgs[:25])])
                     qimgs = []
-                qimgs.append((rel, main_proc(query, name2path[name])))
+                path = pjoin(dev_images_dir, name2path[name])
+                qimgs.append((rel, main_proc(query, path)))
                 last_query = query
 
                 count += 1
