@@ -17,7 +17,7 @@ from cropresize import crop_resize
 import json
 
 from config import *
-from utils import name2path
+from utils import get_name2path
 
 
 def create_index():
@@ -154,6 +154,8 @@ def gist_top10_images(img):
     max conflicts: 8691
     """
     global lsh
+
+    name2path = get_name2path(train_file_map)
     # info of known dataset
     # print lsh.hash_tables[0].keys()[0]
     # print 'bucket ratio: %d/%d' % (len(lsh.hash_tables[0].keys()), 2 ** hash_len)

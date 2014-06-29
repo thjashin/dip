@@ -16,9 +16,11 @@ train_file_map = pjoin(train_dir, 'images_map.tsv')
 
 # dev dir
 dev_dir = '/opt/dip-data/Dev'
+dev_images_dir = pjoin(dev_dir, 'images')
 
 # dev files
 dev_label = pjoin(dev_dir, 'DevSetLabel.tsv')
+dev_file_map = pjoin(dev_dir, 'images_map.tsv')
 
 # trial dir
 trial_dir = 'trial/'

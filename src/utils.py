@@ -8,15 +8,15 @@ import sys
 from config import *
 
 
-def get_name2path():
+def get_name2path(map_file):
     ret = {}
     total_num = 0
-    with open(train_file_map, 'r') as f:
+    with open(map_file, 'r') as f:
             for line in f:
                 if line.strip():
                     total_num += 1
     count = 0
-    with open(train_file_map, 'r') as f:
+    with open(map_file, 'r') as f:
         for line in f:
             if line.strip():
                 count += 1
