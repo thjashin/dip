@@ -177,7 +177,6 @@ def gist_top10_images(img):
     #     name = json.loads(i[0])[1]
     #     print name, name2path[name], i[1]
 
-    print[json.loads(i[0])[1] for i in res[:10]]
     return [json.loads(i[0])[1] for i in res[:10]]
 
 if __name__ == "__main__":
