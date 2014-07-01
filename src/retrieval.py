@@ -153,7 +153,7 @@ def gist_top10_images(img):
     bucket ratio: 225410/4294967296
     max conflicts: 8691
 
-    64 bit hash:
+    40 bit hash:
     bucket ratio: 
     max conficts: 
     """

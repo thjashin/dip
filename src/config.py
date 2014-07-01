@@ -69,4 +69,4 @@ matrices_file = 'matrices.npz'
 normal_size = (32, 32)
 
 # length of hash
-hash_len = 64
+hash_len = 36
