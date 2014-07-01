@@ -154,8 +154,8 @@ def gist_top10_images(img):
     max conflicts: 8691
 
     16 bit hash:
-    bucket ratio: 
-    max conficts: 
+    bucket ratio: 8135/65536
+    max conficts: 93329
     """
     global lsh
 
