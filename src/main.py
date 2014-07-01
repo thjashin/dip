@@ -21,8 +21,10 @@ img2gist = get_img2gist()
 query_miss = 0
 hash_miss = 0
 
+query_top10_cache = None
 
-def main_proc(query, image_path):
+
+def main_proc(query, image_path, cache=False):
     """
     Return distance of a (query, image) pair
     """
@@ -32,9 +34,12 @@ def main_proc(query, image_path):
     im = crop_resize(im, normal_size, True)
     desc = leargist.color_gist(im)
 
-    t1 = -time.time()
-    A = query_top10_images(query)
-    print 'time for query_top10_images:', time.time() + t1
+    if cache:
+        A = query_top10_cache
+    else:
+        t1 = -time.time()
+        A = query_top10_images(query)
+        print 'time for query_top10_images:', time.time() + t1
 
     t2 = -time.time()
     B = gist_top10_images(image_path)
