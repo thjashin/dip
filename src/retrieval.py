@@ -169,6 +169,7 @@ def gist_top10_images(img):
     for k in t.keys():
         counts.append(len(t.get_list(k)))
     print 'max conflicts:', max(counts)
+    print 'min conflicts:', min(counts)
 
     im = Image.open(img)
     im = crop_resize(im, normal_size, True)
