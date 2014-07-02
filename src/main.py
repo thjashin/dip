@@ -87,6 +87,7 @@ def test_on_dev():
 
     dcg = 0
     num_of_queries = 0
+    cache = False
     with open(dev_label, 'r') as f:
         last_query = None
         qimgs = []
@@ -104,10 +105,12 @@ def test_on_dev():
                         sum([(2 ** t[0] - 1) / np.log2(i + 2)
                             for i, t in enumerate(qimgs[:25])])
                     qimgs = []
+                    cache = False
                     break
                 path = pjoin(dev_images_dir, name2path[name])
-                qimgs.append((rel, main_proc(query, path)))
+                qimgs.append((rel, main_proc(query, path, cache)))
                 last_query = query
+                cache = True
 
                 count += 1
                 sys.stdout.write('%d/%d     \r' % (count, total_count))
