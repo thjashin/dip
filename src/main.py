@@ -107,7 +107,6 @@ def test_on_dev():
                             for i, t in enumerate(qimgs[:25])])
                     qimgs = []
                     cache = False
-                    break
                 path = pjoin(dev_images_dir, name2path[name])
                 qimgs.append((rel, main_proc(query, path, cache)))
                 last_query = query
