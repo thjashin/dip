@@ -24,10 +24,13 @@ hash_miss = 0
 query_top10_cache = None
 
 
-def main_proc(query, image_path, cache=False):
+def main_proc(query, image_path, random=False, cache=False):
     """
     Return distance of a (query, image) pair
     """
+    if random:
+        return np.random.rand()
+
     global query_miss, hash_miss, query_top10_cache
 
     im = Image.open(image_path)
@@ -66,14 +69,16 @@ def main_proc(query, image_path, cache=False):
     return min(sim_set)
 
 
-def test_on_dev():
+def test_on_dev(random=False):
     """
     hash length: 40 bit
-    On Dev set
-    Average DCG: 
+
+    On Dev set    
+    Average DCG: 0.48341242426
     total pairs: 79926
-    Query miss: 17241
-    Hash miss: 16300
+    Hash miss: 18955
+    total queries: 1000
+    Query miss: 350
     """
     # load name2path
     name2path = get_name2path(dev_file_map)
@@ -108,7 +113,7 @@ def test_on_dev():
                     qimgs = []
                     cache = False
                 path = pjoin(dev_images_dir, name2path[name])
-                qimgs.append((rel, main_proc(query, path, cache)))
+                qimgs.append((rel, main_proc(query, path, random, cache)))
                 last_query = query
                 cache = True
 
@@ -123,7 +128,7 @@ def test_on_dev():
                     for i, t in enumerate(qimgs[:25])])
     dcg /= num_of_queries
 
-    print 'On Dev set'
+    print 'On Dev set: random =', random
     print 'Average DCG:', dcg
     print 'total pairs:', total_count
     print 'Hash miss:', hash_miss
@@ -132,4 +137,8 @@ def test_on_dev():
 
 
 if __name__ == "__main__":
-    test_on_dev()
+    if len(sys.argv) > 1:
+        if sys.argv[1] == 'random':
+            test_on_dev(random=True)
+    else:
+        test_on_dev()
