@@ -81,6 +81,18 @@ def test_on_dev(random=False):
     Hash miss: 18955
     total queries: 1000
     Query miss: 350
+
+    hash length: 32 bit
+
+    
+
+    On Dev set: random = True
+    Average DCG: 0.470808224778
+    total pairs: 79926
+    Hash miss: 0
+    total queries: 1000
+    Query miss: 0
+
     """
     # load name2path
     name2path = get_name2path(dev_file_map)
