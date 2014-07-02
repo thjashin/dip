@@ -47,7 +47,8 @@ def main_proc(query, image_path, cache=False):
     print 'time for gist_top10_images:', time.time() + t2
 
     if not A:
-        query_miss += 1
+        if not cache:
+            query_miss += 1
         return np.random.rand()
     if not B:
         hash_miss += 1
@@ -126,8 +127,9 @@ def test_on_dev():
     print 'On Dev set'
     print 'Average DCG:', dcg
     print 'total pairs:', total_count
-    print 'Query miss:', query_miss
     print 'Hash miss:', hash_miss
+    print 'total queries:', num_of_queries
+    print 'Query miss:', query_miss
 
 
 if __name__ == "__main__":
