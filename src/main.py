@@ -16,7 +16,7 @@ from PIL import Image
 from cropresize import crop_resize
 import leargist
 
-img2gist = get_img2gist()
+img2gist = None
 
 query_miss = 0
 hash_miss = 0
@@ -31,7 +31,9 @@ def main_proc(query, image_path, random=False, cache=False):
     if random:
         return np.random.rand()
 
-    global query_miss, hash_miss, query_top10_cache
+    global img2gist, query_miss, hash_miss, query_top10_cache
+    if img2gist is None:
+        img2gist = get_img2gist()
 
     im = Image.open(image_path)
     im = crop_resize(im, normal_size, True)
