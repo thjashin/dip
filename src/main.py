@@ -28,7 +28,7 @@ def main_proc(query, image_path, cache=False):
     """
     Return distance of a (query, image) pair
     """
-    global query_miss, hash_miss
+    global query_miss, hash_miss, query_top10_cache
 
     im = Image.open(image_path)
     im = crop_resize(im, normal_size, True)
@@ -39,6 +39,7 @@ def main_proc(query, image_path, cache=False):
     else:
         t1 = -time.time()
         A = query_top10_images(query)
+        query_top10_cache = A
         print 'time for query_top10_images:', time.time() + t1
 
     t2 = -time.time()
@@ -65,6 +66,14 @@ def main_proc(query, image_path, cache=False):
 
 
 def test_on_dev():
+    """
+    hash length: 40 bit
+    On Dev set
+    Average DCG: 
+    total pairs: 79926
+    Query miss: 17241
+    Hash miss: 16300
+    """
     # load name2path
     name2path = get_name2path(dev_file_map)
 
@@ -95,6 +104,7 @@ def test_on_dev():
                         sum([(2 ** t[0] - 1) / np.log2(i + 2)
                             for i, t in enumerate(qimgs[:25])])
                     qimgs = []
+                    break
                 path = pjoin(dev_images_dir, name2path[name])
                 qimgs.append((rel, main_proc(query, path)))
                 last_query = query
@@ -106,7 +116,7 @@ def test_on_dev():
             num_of_queries += 1
             qimgs.sort(lambda x, y: cmp(x[1], y[1]))
             dcg += 0.01757 * \
-                sum([(2 ** t[0] - 1) / np.log2(i + 1)
+                sum([(2 ** t[0] - 1) / np.log2(i + 2)
                     for i, t in enumerate(qimgs[:25])])
     dcg /= num_of_queries
 
