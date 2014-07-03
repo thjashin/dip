@@ -84,7 +84,13 @@ def test_on_dev(random=False):
 
     hash length: 32 bit
 
-    
+    On Dev set: random = False
+    Average DCG: 0.478885632199
+    total pairs: 79926
+    Hash miss: 19790
+    total queries: 1000
+    Query miss: 350
+
 
     On Dev set: random = True
     Average DCG: 0.470808224778
