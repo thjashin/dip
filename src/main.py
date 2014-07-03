@@ -196,6 +196,7 @@ def evaluate():
                 count += 1
                 sys.stdout.write('%d/%d     \r' % (count, total_count))
                 sys.stdout.flush()
+                break
 
     fout.close()
 
