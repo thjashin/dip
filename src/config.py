@@ -30,6 +30,14 @@ trial_images_dir = pjoin(trial_dir, 'images')
 trial_click_log = pjoin(trial_dir, 'IRC2014MMTrial.keyquery.tsv')
 trial_file_map = pjoin(trial_dir, 'images_map.tsv')
 
+# eval dir
+eval_dir = 'eval/'
+eval_images_dir = pjoin(eval_dir, 'images')
+
+# eval files
+eval_key_query = pjoin(eval_dir, 'IRC2014MMTrial.keyquery.tsv')
+eval_file_map = pjoin(eval_dir, 'images_map.tsv')
+
 # -----------------------------------------------------------------------------
 # data dir
 data_dir = 'data/'

@@ -156,6 +156,10 @@ def test_on_dev(random=False):
     print 'Query miss:', query_miss
 
 
+def evaluate():
+    pass
+
+
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         if sys.argv[1] == 'random':
