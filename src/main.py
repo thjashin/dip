@@ -171,7 +171,7 @@ def evaluate():
             if line.strip():
                 total_count += 1
 
-    sys.stdout.write('total_count: %d\n', total_count)
+    sys.stdout.write('total_count: %d\n' % total_count)
     sys.stdout.flush()
 
     cache = False
