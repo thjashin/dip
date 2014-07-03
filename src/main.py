@@ -22,16 +22,17 @@ query_miss = 0
 hash_miss = 0
 
 query_top10_cache = None
+image_top10_cache = None
 
 
-def main_proc(query, image_path, random=False, cache=False):
+def main_proc(query, image_path, random=False, query_cache=False, image_cache=False):
     """
     Return distance of a (query, image) pair
     """
     if random:
         return np.random.rand()
 
-    global img2gist, query_miss, hash_miss, query_top10_cache
+    global img2gist, query_miss, hash_miss, query_top10_cache, image_top10_cache
     if img2gist is None:
         img2gist = get_img2gist()
 
@@ -39,7 +40,7 @@ def main_proc(query, image_path, random=False, cache=False):
     im = crop_resize(im, normal_size, True)
     desc = leargist.color_gist(im)
 
-    if cache:
+    if query_cache:
         A = query_top10_cache
     else:
         t1 = -time.time()
@@ -47,12 +48,16 @@ def main_proc(query, image_path, random=False, cache=False):
         query_top10_cache = A
         print 'time for query_top10_images:', time.time() + t1
 
-    t2 = -time.time()
-    B = gist_top10_images(image_path)
-    print 'time for gist_top10_images:', time.time() + t2
+    if image_cache:
+        B = image_top10_cache
+    else:
+        t2 = -time.time()
+        B = gist_top10_images(image_path)
+        image_top10_cache = B
+        print 'time for gist_top10_images:', time.time() + t2
 
     if not A:
-        if not cache:
+        if not query_cache:
             query_miss += 1
         return np.random.rand()
     if not B:
@@ -157,12 +162,47 @@ def test_on_dev(random=False):
 
 
 def evaluate():
-    pass
+    # load name2path
+    name2path = get_name2path(eval_file_map)
 
+    total_count = 0
+    with open(eval_key_query, 'r') as f:
+        for line in f:
+            if line.strip():
+                total_count += 1
+
+    sys.stdout.write('total_count: %d\n', total_count)
+    sys.stdout.flush()
+
+    cache = False
+    fout = open(pjoin(eval_dir, 'out.tsv'), 'w')
+    with open(eval_key_query, 'r') as f:
+        last_image = None
+        count = 0
+        for line in f:
+            if line.split():
+                arr = line.strip().split('\t')
+                query = arr[1].strip()
+                name = arr[0].strip()
+                if (last_image is not None) and name != last_image:
+                    cache = False
+                path = pjoin(eval_images_dir, name2path[name])
+                rel = main_proc(query, path, random=False, query_cache=False, image_cache=cache)
+                sim = 1.0 / (1 + rel)
+                fout.write(line.strip() + '\t' + str(sim) + '\n')
+                last_image = name
+                cache = True
+
+                count += 1
+                sys.stdout.write('%d/%d     \r' % (count, total_count))
+                sys.stdout.flush()
+
+    fout.close()
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        if sys.argv[1] == 'random':
-            test_on_dev(random=True)
-    else:
-        test_on_dev()
+    # if len(sys.argv) > 1:
+    #     if sys.argv[1] == 'random':
+    #         test_on_dev(random=True)
+    # else:
+    #     test_on_dev()
+    evaluate()
