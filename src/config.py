@@ -35,7 +35,7 @@ eval_dir = 'eval/'
 eval_images_dir = pjoin(eval_dir, 'images')
 
 # eval files
-eval_key_query = pjoin(eval_dir, 'IRC2014MMTrial.keyquery.tsv')
+eval_key_query = pjoin(eval_dir, 'MM14TestSet.KeyLabel.tsv')
 eval_file_map = pjoin(eval_dir, 'images_map.tsv')
 
 # -----------------------------------------------------------------------------
